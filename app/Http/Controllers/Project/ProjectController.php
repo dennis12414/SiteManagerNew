@@ -43,12 +43,12 @@ class ProjectController extends Controller
             $uuid = Str::uuid();
 
             $imageFolderPath = Setting::where('setting_key', 'image_folder_path')->first();
-            if (!$imageFolderPath) {
-                return response([
-                    'ty' => $imageFolderPath,
-                    'message' => 'Image folder path not found in settings',
-                ], 500);
-            }
+//            if (!$imageFolderPath) {
+//                return response([
+//                    'ty' => $imageFolderPath,
+//                    'message' => 'Image folder path not found in settings',
+//                ], 500);
+//            }
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
 
@@ -58,7 +58,9 @@ class ProjectController extends Controller
             $imageName = $uuid . '_' . $uploadedImage->getClientOriginalName();
 
 
-            $uploadedImage->move($imageFolderPath->value, $imageName);
+            //$uploadedImage->move($imageFolderPath->value, $imageName);
+            $path = $uploadedImage->storeAs('project_images', $imageName, 'public');
+
             $inviteCode = Str::uuid()->toString();
 
             $project = Project::create([

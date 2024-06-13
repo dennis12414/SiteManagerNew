@@ -58,5 +58,18 @@ return [
     'partnerCallbackUrl' => env('PARTNER_CALLBACK_URL','https://16ab-197-136-108-65.ngrok-free.app'),
     'narration' => env('NARRATION','Making Test Payment'),
 
+    'disks' => [
+        // ...
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        // ...
+    ],
+
 ];
 

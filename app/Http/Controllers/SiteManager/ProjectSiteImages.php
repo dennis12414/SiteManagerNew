@@ -35,7 +35,8 @@ class ProjectSiteImages extends Controller
 
 
                 try {
-                    $image->move($imageFolderPath->value, $fileName);
+                    //$image->move($imageFolderPath->value, $fileName);
+                    $path = $image->storeAs('project_images', $fileName, 'public');
 
 
                     $savedImages[] = [
@@ -70,7 +71,7 @@ class ProjectSiteImages extends Controller
 
         $domain = Setting::where('setting_key', 'domain')->value('value');
 
-        $imagesData = $projectImages->map(function ($projectImage) use ($domain, $imageFolderPath) {
+        $imagesData = $projectImages->map(function ($projectImage) use ($domain) {
         $imageUrl = $domain . '/' . 'api/images' . '/' . $projectImage->name;
         return [
             'imageId' => $projectImage->imageId,
@@ -87,22 +88,32 @@ class ProjectSiteImages extends Controller
 
     public function show($filename)
     {
-        $imageFolderPath = Setting::where('setting_key', 'image_folder_path')->first();
-        if (!$imageFolderPath) {
+//        $imageFolderPath = Setting::where('setting_key', 'image_folder_path')->first();
+//        if (!$imageFolderPath) {
+//            return response([
+//                'message' => 'Image folder path not found in settings',
+//            ], 500);
+//        }
+//
+//
+//
+//        $path =  $imageFolderPath->value .'/' . $filename;
+//
+//        if (!file_exists($path)) {
+//            abort(404);
+//        }
+//
+//        return response()->file($path);
+        $disk = 'public';
+        $path = 'project_images/' . $filename;
+
+        if (!Storage::disk($disk)->exists($path)) {
             return response([
-                'message' => 'Image folder path not found in settings',
-            ], 500);
+                'message' => 'File not found',
+            ], 404);
         }
 
-
-
-        $path =  $imageFolderPath->value .'/' . $filename;
-
-        if (!file_exists($path)) {
-            abort(404);
-        }
-
-        return response()->file($path);
+        return Storage::disk($disk)->response($path);
     }
 
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Advertise\AdvertController;
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Chat\ChatMessageController;
+use App\Http\Controllers\Inventory\inventoryController;
 use App\Http\Controllers\Project\ProjectController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Worker\WorkerController;
@@ -61,6 +62,10 @@ Route::post('confirmation', [C2BResponse::class, 'confirmation']);
     Route::put('/advert/{advertId}/update', [AdvertController::class, 'update']);
 
 
+    Route::get('inventory/{projectId}', [InventoryController::class, 'index']); // Get all inventory items for a specific project
+    Route::get('inventory/show/{inventoryId}/{projectId}', [InventoryController::class, 'show']); // Get a specific inventory item
+    Route::post('inventory/{projectId}', [InventoryController::class, 'store']); // Store a new inventory item
+    Route::put('inventory/{inventoryId}', [InventoryController::class, 'update']); // Update an existing inventory item
 
     Route::Get('/projects/{siteManagerId}', [ProjectController::class, 'show']);//show projects
     Route::post('/projects', [ProjectController::class, 'store']);//create project
