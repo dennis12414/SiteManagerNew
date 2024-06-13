@@ -18,11 +18,11 @@ class ProjectSiteImages extends Controller
 
 
         $imageFolderPath = Setting::where('setting_key', 'image_folder_path')->first();
-        if (!$imageFolderPath) {
-            return response([
-                'message' => 'Image folder path not found in settings',
-            ], 500);
-        }
+//        if (!$imageFolderPath) {
+//            return response([
+//                'message' => 'Image folder path not found in settings',
+//            ], 500);
+//        }
 
 
         $savedImages = [];
