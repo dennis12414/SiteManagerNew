@@ -63,7 +63,7 @@ class WorkerController extends Controller
                 ], 500);
             }
             $uploadedImage = $request->file('image');
-
+            //ss
             $imageName = $uuid . '_' . $uploadedImage->getClientOriginalName();
 
             $uploadedImage->storeAs($imageFolderPath, $imageName);
