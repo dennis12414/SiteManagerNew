@@ -78,7 +78,7 @@ class WorkerController extends Controller
                 'gender' => $request->gender,
                 'profilePic' => $imageName,
             ]);
-
+            $worker->refresh();
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
             $worker->profilePic = $domain . '/' .$imageFolderPath. '/' . $worker->profilePic;
