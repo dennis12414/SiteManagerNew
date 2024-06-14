@@ -81,7 +81,7 @@ class WorkerController extends Controller
             $worker->refresh();
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
-            $worker->profilePic = $domain . '/' .$imageFolderPath. '/' . $worker->profilePic;
+            $worker->profilePic = 'https://sitemanagernew-production.up.railway.app' . '/' .$imageFolderPath. '/' . $worker->profilePic;
 
             return response([
                 'message' => 'Worker created successfully',

@@ -72,7 +72,7 @@ class ProjectSiteImages extends Controller
         $domain = Setting::where('setting_key', 'domain')->value('value');
 
         $imagesData = $projectImages->map(function ($projectImage) use ($domain) {
-        $imageUrl = $domain . '/' . 'api/images' . '/' . $projectImage->name;
+        $imageUrl = 'https://sitemanagernew-production.up.railway.app' . '/' . 'api/images' . '/' . $projectImage->name;
         return [
             'imageId' => $projectImage->imageId,
             'url' => $imageUrl,
@@ -133,7 +133,7 @@ class ProjectSiteImages extends Controller
         $domain = Setting::where('setting_key', 'domain')->value('value');
 
         $imageUrls = $projectImages->map(function ($projectImage) use ($domain, $imageFolderPath) {
-            $imageUrl = $domain . '/' . 'api/images' . '/' . $projectImage->name;
+            $imageUrl = 'https://sitemanagernew-production.up.railway.app' . '/' . 'api/images' . '/' . $projectImage->name;
             return [
                 'imageId' => $projectImage->imageId,
                 'url' => $imageUrl,
