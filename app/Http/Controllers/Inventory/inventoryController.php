@@ -52,9 +52,9 @@ class inventoryController extends Controller
     }
 
     // Update the specified resource in storage
-    public function update(Request $request, $projectId, $inventoryId)
+    public function update(Request $request, $inventoryId)
     {
-        $inventoryItem = Inventory::where('projectId', $projectId)->where('inventoryId', $inventoryId)->first();
+        $inventoryItem = Inventory::where('inventoryId', $inventoryId)->first();
 
         if (!$inventoryItem) {
             return response()->json(['message' => 'Inventory item not found'], 404);
@@ -72,6 +72,6 @@ class inventoryController extends Controller
 
         $inventoryItem->update($request->all());
 
-        return response()->json($inventoryItem, 200);
+        return response(["item"=>$inventoryItem], 200);
     }
 }
