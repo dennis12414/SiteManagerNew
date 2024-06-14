@@ -141,7 +141,7 @@ class ProjectController extends Controller
         foreach($projects as $project){
             $project['siteManagerId'] = (int) $id;
             if($project->image != null){
-                $project->image = $domain . '/' .'api/images'. '/' . $project->image;
+                $project->image = 'https://sitemanagernew-production.up.railway.app' . '/' .'api/images'. '/' . $project->image;
             }
         }
         return response([
@@ -232,7 +232,7 @@ class ProjectController extends Controller
 
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
-            $project->image = $domain . '/' .'api/images'. '/' . $project->image;
+            $project->image = 'https://sitemanagernew-production.up.railway.app' . '/' .'api/images'. '/' . $project->image;
 
             return response([
                 'message' => 'Project updated successfully',
@@ -257,7 +257,7 @@ class ProjectController extends Controller
 
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
-            $project->image = $domain . '/' .'api/images'. '/' . $project->image_name;
+            $project->image = 'https://sitemanagernew-production.up.railway.app' . '/' .'api/images'. '/' . $project->image_name;
 
             return response([
                 'message' => 'Project updated successfully',
