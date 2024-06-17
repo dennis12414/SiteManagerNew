@@ -257,7 +257,9 @@ class ProjectController extends Controller
 
             $domain = Setting::where('setting_key', 'domain')->value('value');
 
-            $project->image = 'https://sitemanagernew-production.up.railway.app' . '/' .'api/images'. '/' . $project->image_name;
+            if($project->image != null) {
+                $project->image = 'https://sitemanagernew-production.up.railway.app' . '/' . 'api/images' . '/' . $project->image_name;
+            }
 
             return response([
                 'message' => 'Project updated successfully',
