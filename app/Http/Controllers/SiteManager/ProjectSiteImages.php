@@ -104,16 +104,28 @@ class ProjectSiteImages extends Controller
 //        }
 //
 //        return response()->file($path);
-        $disk = 'public';
-        $path = 'project_images/' . $filename;
 
-        if (!Storage::disk($disk)->exists($path)) {
-            return response([
-                'message' => 'File not found',
-            ], 404);
+
+
+        $filePath = storage_path('app/public/project_images/' . $filename);
+
+        if (file_exists($filePath)) {
+            return response()->file($filePath);
+        } else {
+            return response()->json(['error' => 'File not found'], 404);
         }
 
-        return Storage::disk($disk)->response($path);
+
+//        $disk = 'public';
+//        $path = 'project_images/' . $filename;
+//
+//        if (!Storage::disk($disk)->exists($path)) {
+//            return response([
+//                'message' => 'File not found',
+//            ], 404);
+//        }
+//
+//        return Storage::disk($disk)->response($path);
     }
 
 
